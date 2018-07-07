@@ -1,7 +1,7 @@
 # Configuration
 
 **semantic-release** configuration consist of:
-- Git repository options ([URL](#repositoryurl), [release branch](#branch) and [tag format](#tagformat))
+- Git repository options ([URL](#repositoryurl), [release branches](#branches) and [tag format](#tagformat))
 - [plugins](#plugins) definition
 - run mode ([debug](#debug), [dry run](#dryrun) and [local (no CI)](#ci))
 
@@ -25,7 +25,7 @@ Via `release` key in the project's `package.json` file:
 ```json
 {
   "release": {
-    "branch": "next"
+    "branches": ["master", "next"]
   }
 }
 ```
@@ -37,7 +37,7 @@ Via `.releaserc` file:
 
 ```json
 {
-  "branch": "next"
+  "branches": ["master", "next"]
 }
 ```
 ```bash
@@ -67,13 +67,13 @@ List of modules or file paths containing a [shareable configuration](shareable-c
 
 **Note**: Options defined via CLI arguments or in the configuration file will take precedence over the ones defined in any shareable configuration.
 
-### branch
+### branches
 
-Type: `String`<br>
-Default: `master`<br>
-CLI arguments: `-b`, `--branch`
+Type: `Array`, `String`, `Object`<br>
+Default: `['master']`<br>
+CLI arguments: `--branches`
 
-The branch on which releases should happen.
+The branches on which releases should happen.
 
 ### repositoryUrl
 
@@ -144,7 +144,7 @@ Output debugging information. It can also be enabled by setting the `DEBUG` envi
 
 ## Existing version tags
 
-**semantic-release** uses [Git tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging) to determine the commits added since the last release. If a release have been published before setting up **semantic-release** you must make sure the most recent commit included in the last published release is in the [release branch](#branch) history and is tagged with the version released, formatted according to the [tag format](#tagformat) configured (defaults to `vx.y.z`).
+**semantic-release** uses [Git tags](https://git-scm.com/book/en/v2/Git-Basics-Tagging) to determine the commits added since the last release. If a release have been published before setting up **semantic-release** you must make sure the most recent commit included in the last published release is in the [release branches](#branches) history and is tagged with the version released, formatted according to the [tag format](#tagformat) configured (defaults to `vx.y.z`).
 
 If the previous releases were published with [`npm publish`](https://docs.npmjs.com/cli/publish) this should already be the case.
 
